@@ -86,12 +86,14 @@ ul {
 }
 
 .nav-link {
+  position: relative;
   color: var(--main-text-color);
   font-weight: 500;
   font-size: 14px;
   line-height: 1.14;
   letter-spacing: 0.02em;
   text-decoration: none;
+  padding: 32px 0;
 
   transition: color 250ms var(--cubic);
 }
@@ -102,6 +104,18 @@ ul {
 
 .nav-link.current {
   color: var(--accent-color);
+}
+
+.current::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  content: " ";
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: var(--accent-color);
 }
 
 .nav-link:hover,
@@ -131,6 +145,7 @@ ul {
   line-height: 1.14;
   letter-spacing: 0.02em;
   text-decoration: none;
+  padding: 32px 0;
 
   transition: color 250ms var(--cubic);
 }
@@ -190,6 +205,56 @@ ul {
   text-align: center;
   letter-spacing: 0.06em;
   cursor: pointer;
+}
+
+/* Modal */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  z-index: 1;
+
+  transition: opacity 300ms var(--cubic);
+}
+
+.backdrop.is-hidden {
+  visibility: visible;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 528px;
+  height: 581px;
+  background-color: var(--white-text-color);
+}
+
+.btn-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  background-color: var(--white-text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn-close {
+  fill: #000000;
 }
 
 /* feature */
@@ -541,18 +606,50 @@ ul {
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
 
-.project-title {
-  color: var(--main-text-color);
-  font-weight: 700;
+.project-thumb {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  transform: translateY(100%);
+  transition: transform 250ms var(--cubic);
+}
+
+.overlay-description {
+  color: var(--white-text-color);
+  background: rgba(33, 150, 243, 0.9);
+  font-weight: 400;
   font-size: 18px;
-  line-height: 2;
-  letter-spacing: 0.06em;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+
+  padding: 63px 24px;
 }
 
 .project-description {
   padding: 20px 24px;
   background: #ffffff;
   border: 1px solid #eeeeee;
+}
+
+.project-item:hover .project-overlay {
+  transform: translateY(0);
+}
+
+.project-title {
+  color: var(--main-text-color);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 2;
+  letter-spacing: 0.06em;
 }
 
 .project-desk {
